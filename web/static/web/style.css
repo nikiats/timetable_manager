@@ -1,0 +1,38 @@
+.center-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.btn-basic {
+	text-align: center;
+	width: 180px;
+	border: 1px solid black;
+	padding: 6px 8px;
+	margin: 2px 0;
+	text-decoration: none;
+	color: black;
+}
+
+.btn-basic:hover {
+	border: 1px solid blue;
+	color: blue;
+}
+
+input[type="text"], input[type="password"] {
+	border: 1px solid black;
+	padding: 4px;
+	font-size: 14px;
+	margin: 2px 0;
+}
+
+.vertical-rows {
+	display: flex;
+	flex-direction: column;
+}
+
+.heading:hover {
+	cursor: pointer;
+	color: blue;
+}
