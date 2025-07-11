@@ -1,0 +1,8 @@
+{% if messages %}
+    {% for message in messages %}
+        <div class="message message-{{ message.kind }}">
+            {{ message.text }}
+            <button class="close-btn" onclick="this.parentElement.style.display='none';">&times;</button>
+        </div>
+    {% endfor %}
+{% endif %}

@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 
-from web.forms import UserSignupForm
+from web.forms import UserLoginForm, UserSignupForm
 
 
 def index_view(request):
@@ -16,6 +16,7 @@ def index_view(request):
 
 
 def signup_view(request):
+    context = { 'site_name': settings.SITE_NAME }
     if request.method == 'POST':
         form = UserSignupForm(request.POST)
         
@@ -27,13 +28,24 @@ def signup_view(request):
             login(request, user)
 
             return redirect('timetable')
+        else:
+            context['messages'] = [
+                { 'text': 'Ошибка регистрации', 'kind': 'error' }
+            ]
+            return render(request, 'web/signup.html', context)
     else:
-        context = { 'site_name': settings.SITE_NAME }
         return render(request, 'web/signup.html', context)
 
 
 def login_view(request):
-    return render(request, 'web/login.html')
+    if request.method == 'POST':
+        form = UserLoginForm(request.POST)
+
+        if form.is_valid():
+            pass
+            
+    context = { 'site_name': settings.SITE_NAME }
+    return render(request, 'web/login.html', context)
 
 
 @login_required

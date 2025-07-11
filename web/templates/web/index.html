@@ -1,16 +1,11 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>{{ site_name }} | Главная</title>
-	<link rel="stylesheet" href="{% static 'web/style.css' %}" type="text/css">
-</head>
+{% include "web/elements/head.html" %}
 <body>
 	<div class="center-container">
 		<h2 class="heading" onclick="window.location.href = '/';">{{ site_name }}</h2>
 		<div class="vertical-rows">
+			{% include "web/elements/messages.html" %}
 			<a href="signup" class="btn-basic">Регистрация</a>
 			<a href="login" class="btn-basic">Вход</a>
 		</div>

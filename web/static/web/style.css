@@ -54,7 +54,7 @@
 
 
 input[type="text"], input[type="password"] {
-    border: 2px solid #7f9db9; /* Classic XP blue-gray border */
+    border: 2px solid #7f9db9;
     padding: 4px 4px;
     font-size: 14px;
     font-family: Tahoma, Verdana, Segoe, sans-serif;
@@ -82,4 +82,63 @@ input[type="text"]:focus, input[type="password"]:focus {
 .heading:hover {
 	cursor: pointer;
 	color: blue;
+}
+
+p.message-error,
+p.message-success {
+    font-family: Tahoma, Verdana, Arial, sans-serif;
+    font-size: 14px;
+    color: #000;
+    padding: 16px 20px;
+    position: relative;
+    border-radius: 6px;
+    /* box-shadow: 2px 2px 8px #b0b0b0; */
+    margin: 16px 0;
+}
+
+.close-btn {
+    width: 28px;
+    height: 28px;
+    border: 1px solid #b5b5b5;
+    border-radius: 4px;
+    background: linear-gradient(to bottom, #f3f3f3 0%, #e2e2e2 100%);
+    color: #c00;
+    font-size: 20px;
+    font-weight: bold;
+    box-shadow: 1px 1px 0 #fff inset, -1px -1px 0 #aaa inset;
+    cursor: pointer;
+    outline: none;
+    transition: background 0.2s, color 0.2s;
+    padding: 0;
+    line-height: 26px;
+    text-align: center;
+  }
+  
+  .close-btn:hover {
+    background: linear-gradient(to bottom, #ff5a5a 0%, #c00 100%);
+    color: #fff;
+    border-color: #c00;
+  }
+  
+
+.message {
+    position: relative;
+    padding: 12px 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #f9f9f9;
+    margin: 8px 0;
+    font-family: sans-serif;
+  }
+
+/* Error Message */
+p.message-error {
+    background: #fff4f1;
+    border: 2px solid #e57373;
+}
+
+/* Success Message */
+p.message-success {
+    background: #f1fff4;
+    border: 2px solid #4caf50;
 }
