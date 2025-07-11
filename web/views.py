@@ -11,11 +11,13 @@ from web.forms import UserLoginForm, UserSignupForm
 
 def index_view(request):
     context = { 'site_name': settings.SITE_NAME }
-    print(context)
     return render(request, 'web/index.html', context)
 
 
 def signup_view(request):
+    if request.user.is_authenticated:
+        return redirect(getattr(settings, 'LOGIN_REDIRECT_URL'))
+
     context = { 'site_name': settings.SITE_NAME }
     if request.method == 'POST':
         form = UserSignupForm(request.POST)
@@ -27,17 +29,25 @@ def signup_view(request):
             )
             login(request, user)
 
-            return redirect('timetable')
+            return redirect('web:timetable')
         else:
-            context['messages'] = [
-                { 'text': 'Ошибка регистрации', 'kind': 'error' }
-            ]
+            messages = []
+            print(form.errors.items())
+
+            for errors in form.errors.values():
+                for error in errors:
+                    messages.append({ 'text': error, 'kind': 'error' })
+
+            context['messages'] = messages
             return render(request, 'web/signup.html', context)
     else:
         return render(request, 'web/signup.html', context)
 
 
 def login_view(request):
+    if request.user.is_authenticated:
+        return redirect(getattr(settings, 'LOGIN_REDIRECT_URL'))
+
     if request.method == 'POST':
         form = UserLoginForm(request.POST)
 
@@ -56,4 +66,4 @@ def timetable_view(request):
 
 def logout_view(request):
     logout(request)
-    return redirect('index')
+    return redirect('web:index')

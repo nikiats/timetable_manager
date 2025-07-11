@@ -6,7 +6,7 @@
 		<h2 class="heading" onclick="window.location.href = '/';">{{ site_name }}</h2>
 		{% include "web/elements/messages.html" %}
 		<h3>Расписание</h3>
-        <form action="{% url 'logout' %}" method="post" class="vertical-rows">
+        <form action="{% url 'web:logout' %}" method="post" class="vertical-rows">
             {% csrf_token %}
             <input type="submit" class="btn-basic" value="Выйти"/>
         </form>
