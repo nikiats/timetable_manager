@@ -1,7 +1,0 @@
-function signup() {
-
-}
-
-function login() {
-
-}

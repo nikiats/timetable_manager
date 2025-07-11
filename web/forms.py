@@ -27,5 +27,11 @@ class UserSignupForm(forms.Form):
     
 
 class UserLoginForm(forms.Form):
-    username = forms.CharField(label='username', widget=forms.PasswordInput)
-    password = forms.CharField(label='password', widget=forms.PasswordInput)
+    username = forms.CharField(
+        label='username',
+        error_messages={'required': 'Введите имя пользователя'}
+    )
+    password = forms.CharField(
+        label='password',
+        error_messages={'required': 'Введите пароль'}
+    )

@@ -9,7 +9,6 @@
     box-sizing: border-box;
 }
 
-
 .center-container {
 	display: flex;
 	flex-direction: column;
@@ -69,7 +68,7 @@ input[type="text"], input[type="password"] {
 }
 
 input[type="text"]:focus, input[type="password"]:focus {
-    border: 2px solid #28597a; /* Darker blue on focus */
+    border: 2px solid #28597a;
     background: linear-gradient(to bottom, #f0f8ff 0%, #dbefff 100%);
 }
 
@@ -92,7 +91,6 @@ p.message-success {
     padding: 16px 20px;
     position: relative;
     border-radius: 6px;
-    /* box-shadow: 2px 2px 8px #b0b0b0; */
     margin: 16px 0;
 }
 
@@ -131,13 +129,11 @@ p.message-success {
     font-family: sans-serif;
   }
 
-/* Error Message */
 p.message-error {
     background: #fff4f1;
     border: 2px solid #e57373;
 }
 
-/* Success Message */
 p.message-success {
     background: #f1fff4;
     border: 2px solid #4caf50;
