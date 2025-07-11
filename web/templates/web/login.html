@@ -4,17 +4,19 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>{{ site_name }} | Таблица с расписанием</title>
+	<title>{{ site_name }} | Вход</title>
 	<link rel="stylesheet" href="{% static 'web/style.css' %}" type="text/css">
 </head>
 <body>
 	<div class="center-container">
 		<h2 class="heading" onclick="window.location.href = '/';">{{ site_name }}</h2>
-		<h3>Расписание</h3>
-        <form action="{% url 'logout' %}" method="post" class="vertical-rows">
-            {% csrf_token %}
-            <input type="submit" class="btn-basic" value="Выйти"/>
-        </form>
+		<h3>Вход</h3>
+		<form action="login" method="post" class="vertical-rows">
+			{% csrf_token %}
+			<input type="text" name="username" placeholder="имя пользователя"/>
+			<input type="password" name="password" placeholder="пароль"/>
+			<input type="submit" class="btn-basic" value="Отправить"/>
+		</form>
 	</div>
 </body>
 </html>

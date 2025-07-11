@@ -17,6 +17,7 @@ from django.urls import reverse_lazy
 # Authentification
 
 LOGIN_REDIRECT_URL = reverse_lazy('web:timetable')
+LOGIN_URL = reverse_lazy('web:login')
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -128,3 +129,7 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# Project settings
+
+SITE_NAME = "TimetableManager"
