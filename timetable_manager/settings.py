@@ -133,3 +133,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # Project settings
 
 SITE_NAME = "TimetableManager"
+
+DAY_TIME_MIN = 7
+DAY_TIME_MAX = 23

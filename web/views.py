@@ -6,6 +6,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 
 from web.forms import UserLoginForm, UserSignupForm
+from web.models import Profile, Timetable
 
 
 def create_error_dicts(form):
@@ -41,6 +42,9 @@ def signup_view(request):
 
             user = User.objects.create_user(username=username, password=password)
             login(request, user)
+
+            profile = Profile.objects.create(user=user, timetable=Timetable.objects.create())
+            
             return redirect('web:timetable')
         else:
             context['messages'] = create_error_dicts(form)
@@ -69,9 +73,7 @@ def login_view(request):
         else:
             context['messages'] = create_error_dicts(form)
 
-        return render(request, 'web/login.html', context)
-    else:
-        return render(request, 'web/login.html', context)
+    return render(request, 'web/login.html', context)
 
 
 @login_required
