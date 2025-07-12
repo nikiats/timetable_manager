@@ -1,0 +1,62 @@
+table.timetable-editable {
+    width: 70%;
+    border-collapse: collapse;
+    font-family: Segoe UI, Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 14px;
+}
+
+table.timetable-editable th,
+table.timetable-editable td {
+    border: 1px solid #7ba7d6; /* XP blue border */
+    width: 50px;
+    height: 20px;
+    background: #f6fafd; /* XP light blue cell background */
+    color: #222;
+    padding: 4px 8px;
+    text-align: center;
+    transition: background 0.2s;
+}
+
+/* Top header row (except first cell) */
+table.timetable-editable th:not(:first-child) {
+    border: 1px solid #3a6ea5; /* Stronger blue for header */
+    font-weight: bold;
+    background: linear-gradient(to bottom, #e3efff 0%, #b1d3f7 100%);
+    color: #15428b;
+    text-shadow: 1px 1px 0 #fff;
+}
+
+/* First column of every row (including top-left cell) */
+table.timetable-editable th:first-child {
+    background: #e3efff;
+    color: #15428b;
+    font-weight: bold;
+    text-align: left;
+    text-shadow: 1px 1px 0 #fff;
+    border: 1px solid #3a6ea5;
+}
+
+/* Hover effect for data cells */
+table.timetable-editable tr:hover td {
+    background: #dbeaf9; /* XP hover blue */
+}
+
+/* Optional: Remove hover effect from first column */
+table.timetable-editable tr:hover th:first-child {
+    background: #e3efff;
+}
+
+/* Optional: Zebra striping for rows */
+table.timetable-editable tbody td {
+    background: #f0f6fb;
+}
+
+table.timetable-editable tbody tr td:first-child {
+    background: #e3efff;
+    color: #15428b;
+    font-weight: bold;
+    text-align: left;
+    text-shadow: 1px 1px 0 #fff;
+    border: 1px solid #3a6ea5;
+    width: 50px;
+}

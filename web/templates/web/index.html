@@ -6,8 +6,13 @@
 		<h2 class="heading" onclick="window.location.href = '/';">{{ site_name }}</h2>
 		<div class="vertical-rows">
 			{% include "web/elements/messages.html" %}
-			<a href="signup" class="btn-basic">Регистрация</a>
-			<a href="login" class="btn-basic">Вход</a>
+			{% if authorized %}
+				<a href="timetable" class="btn-basic">Перейти к расписанию</a>
+				<a href="logout" class="btn-basic">Выйти</a>
+			{% else %}
+				<a href="signup" class="btn-basic">Регистрация</a>
+				<a href="login" class="btn-basic">Вход</a>
+			{% endif %}
 		</div>
 	</div>
 </body>

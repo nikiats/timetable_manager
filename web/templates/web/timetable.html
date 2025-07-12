@@ -6,6 +6,26 @@
 		<h2 class="heading" onclick="window.location.href = '/';">{{ site_name }}</h2>
 		{% include "web/elements/messages.html" %}
 		<h3>Расписание</h3>
+		<table class="timetable-editable">
+			<tr>
+				<th></th>
+				<th>Пн</th>
+				<th>Вт</th>
+				<th>Ср</th>
+				<th>Чт</th>
+				<th>Пт</th>
+				<th>Сб</th>
+				<th>Вс</th>
+			</tr>
+			{% for row in timetable %}
+				<tr>
+					{% for cell in row %}
+						<td>{{ cell }}</td>
+					{% endfor %}
+				</tr>
+			{% endfor %}
+		</table>
+		<p></p>
         <form action="{% url 'web:logout' %}" method="post" class="vertical-rows">
             {% csrf_token %}
             <input type="submit" class="btn-basic" value="Выйти"/>
