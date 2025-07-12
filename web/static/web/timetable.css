@@ -12,7 +12,7 @@ table.timetable-editable td {
     height: 20px;
     background: #f6fafd; /* XP light blue cell background */
     color: #222;
-    padding: 4px 8px;
+    padding: 2px 6px;
     text-align: center;
     transition: background 0.2s;
 }
@@ -59,4 +59,34 @@ table.timetable-editable tbody tr td:first-child {
     text-shadow: 1px 1px 0 #fff;
     border: 1px solid #3a6ea5;
     width: 50px;
+}
+
+
+/* Make input fill the td cell and look like regular text */
+table.timetable-editable td input {
+    width: 100%;
+    border: none;
+    background: transparent;
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    margin: 0;
+    outline: none; /* no outline on focus */
+    box-shadow: none;
+    cursor: text;
+}
+
+/* On focus, do not change background or outline, just show cursor */
+table.timetable-editable td input:focus {
+    background: transparent;
+    outline: none;
+    box-shadow: none;
+    border: none;
+}
+
+/* Remove input's default inner padding and margin to align text properly */
+table.timetable-editable td input::-webkit-inner-spin-button,
+table.timetable-editable td input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }

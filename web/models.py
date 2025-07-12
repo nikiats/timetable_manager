@@ -41,10 +41,10 @@ class Timetable(models.Model):
 
 
 	def to_table(self):
-		rows = [[str(hour) + ':00'] for hour in range(HOUR_MIN, HOUR_MAX + 1)]
+		rows = [{ 'hour': str(hour) + ':00', 'lessons': [] } for hour in range(HOUR_MIN, HOUR_MAX + 1)]
 		for day in self.contents:
 			for i, lesson in enumerate(day):
-				rows[i].append(lesson)
+				rows[i]['lessons'].append(lesson)
 		return rows
 
 
