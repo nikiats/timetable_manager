@@ -1,12 +1,19 @@
 from django.shortcuts import render, redirect
 from django.conf import settings
+from django.http import JsonResponse
 
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
+from django.conf import settings
 
-from web.forms import UserLoginForm, UserSignupForm
+from web.forms import UserLoginForm, UserSignupForm, TimetableCellEditForm
 from web.models import Timetable
+
+
+HOUR_MIN = getattr(settings, 'DAY_TIME_MIN')
+MAX_LESSON_LENGTH = getattr(settings, 'MAX_LESSON_LENGTH')
+SITE_NAME = getattr(settings, 'SITE_NAME')
 
 
 def create_error_dicts(form):
@@ -82,9 +89,10 @@ def login_view(request):
 @login_required
 def timetable_view(request):
     timetable = request.user.timetable
-    table_content = timetable.to_table()
+    table_content = timetable.to_rows()
     context = { 
-        'site_name': settings.SITE_NAME,
+        'max_lesson_length': MAX_LESSON_LENGTH,
+        'site_name': SITE_NAME,
         'timetable': table_content
     }
     return render(request, 'web/timetable.html', context)
@@ -93,3 +101,20 @@ def timetable_view(request):
 def logout_view(request):
     logout(request)
     return redirect('web:index')
+
+
+@login_required
+def update_timetable(request):
+    if request.method == 'POST':
+        form = TimetableCellEditForm(request.POST)
+        if form.is_valid():
+            timetable = request.user.timetable
+
+            day_index = form.cleaned_data['day_index']
+            hour = form.cleaned_data['hour']
+
+            timetable.contents[day_index][hour - HOUR_MIN] = form.cleaned_data['value']
+            timetable.save()
+            return JsonResponse({'success': True, 'errors': []}, status=200)
+        else:
+            return JsonResponse({ 'success': False, 'errors': list(form.errors.items()) }, status=400)

@@ -1,4 +1,8 @@
 from django import forms
+from django.conf import settings
+
+HOUR_MIN = getattr(settings, 'DAY_TIME_MIN')
+HOUR_MAX = getattr(settings, 'DAY_TIME_MAX')
 
 
 class UserSignupForm(forms.Form):
@@ -35,3 +39,31 @@ class UserLoginForm(forms.Form):
         label='password',
         error_messages={'required': 'Введите пароль'}
     )
+
+
+class TimetableCellEditForm(forms.Form):
+    day_index = forms.IntegerField(
+        label='day_index',
+        error_messages={'required': 'Не указан индекс дня недели'}
+    )
+    hour = forms.IntegerField(
+        label='hour',
+        error_messages={'required': 'Не указан час занятия для изменения'}
+    )
+    value = forms.CharField(
+        label='value',
+        required=False,
+        error_messages={'required': 'Не указано значение ячейки'}
+    )
+
+    def clean(self):
+        cleaned_data = super().clean()
+        hour = cleaned_data.get('hour')
+        day_index = cleaned_data.get('day_index')
+        
+        if hour < HOUR_MIN or hour > HOUR_MAX:
+            self.add_error('hour', 'Час вне допустимого диапазона')
+        if day_index < 0 or day_index > 7 - 1:
+            self.add_error('day_index', 'Допустим индекс дня от 0 до 6')
+        
+        return cleaned_data

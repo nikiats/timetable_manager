@@ -1,5 +1,5 @@
 table.timetable-editable {
-    width: 70%;
+    width: 80%;
     border-collapse: collapse;
     font-family: Segoe UI, Tahoma, Geneva, Verdana, sans-serif;
     font-size: 14px;
@@ -89,4 +89,37 @@ table.timetable-editable td input::-webkit-inner-spin-button,
 table.timetable-editable td input::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
+}
+
+.cell-available {
+    background-color: rgb(188, 255, 111) !important;
+}
+
+.cell-lesson {
+    background-color: rgb(255, 198, 92) !important;
+}
+
+.result-label {
+    width: 100%;
+    text-align: center;
+    font-size: 22px;
+}
+
+.result-label.success {
+    color: rgb(0, 196, 0);
+    animation: flash 1s ease-in forwards;
+}
+
+.result-label.error {
+    color: orangered;
+    animation: flash 1s ease-in forwards;
+}
+
+@keyframes flash {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
 }

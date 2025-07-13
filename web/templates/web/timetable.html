@@ -1,7 +1,9 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 {% include "web/elements/head.html" %}
 <body>
+	<script type="text/javascript" src="{% static 'web/timetable.js' %}" type="text/css"></script>
 	<div class="center-container">
 		<h2 class="heading" onclick="window.location.href = '/';">{{ site_name }}</h2>
 		{% include "web/elements/messages.html" %}
@@ -18,19 +20,30 @@
 				<th>Вс</th>
 			</tr>
 			{% for row in timetable %}
-				<tr>
-					<td>{{ row.hour }}</td>
-					{% for cell in row.lessons %}
-						<td><input type="text" name="cell_{{ row_idx }}_{{ col_idx }}" value="{{ cell }}" /></td>
-					{% endfor %}
-				</tr>
+			<tr>
+				<td>{{ row.hour }}</td>
+				{% for cell in row.lessons %}
+				<!-- select between class cell-available and cell-lesson -->
+				<td class="cell-{% if cell == '-' %}available{% elif cell != '' %}lesson{% endif %}">
+					<input
+					maxlength="{{ max_lesson_length }}"
+					oninput="cell_changed(this)"
+					type="text"
+					data-row="{{ forloop.parentloop.counter0 }}"
+					data-col="{{ forloop.counter0 }}"
+					value="{{ cell }}"
+					onblur="save(this)"/>
+				</td>
+				{% endfor %}
+			</tr>
 			{% endfor %}
 		</table>
 		<p></p>
         <form action="{% url 'web:logout' %}" method="post" class="vertical-rows">
-            {% csrf_token %}
+			{% csrf_token %}
             <input type="submit" class="btn-basic" value="Выйти"/>
         </form>
+		<p class="result-label"></p>
 	</div>
 </body>
 </html>

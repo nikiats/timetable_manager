@@ -40,7 +40,7 @@ class Timetable(models.Model):
 		return k
 
 
-	def to_table(self):
+	def to_rows(self):
 		rows = [{ 'hour': str(hour) + ':00', 'lessons': [] } for hour in range(HOUR_MIN, HOUR_MAX + 1)]
 		for day in self.contents:
 			for i, lesson in enumerate(day):
@@ -54,21 +54,3 @@ class Timetable(models.Model):
 
 		return f'<Timetable [lessons: {lessons}, available: {available}]>'
 
-
-# class Profile(models.Model):
-#     user = models.OneToOneField(
-# 		User,
-# 		on_delete=models.CASCADE,
-# 		null=False,
-# 		related_name='profile'
-# 	)
-
-#     timetable = models.OneToOneField(
-# 		Timetable,
-# 		on_delete=models.CASCADE,
-# 		null=False,
-# 		related_name='profile'
-# 	)
-
-#     def __str__(self):
-#         return f'<Profile username={self.user.username}>'

@@ -136,3 +136,5 @@ SITE_NAME = "TimetableManager"
 
 DAY_TIME_MIN = 7
 DAY_TIME_MAX = 23
+
+MAX_LESSON_LENGTH = 20
