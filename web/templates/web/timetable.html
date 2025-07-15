@@ -32,6 +32,7 @@
 					data-col="{{ forloop.counter0 }}"
 					value="{{ cell }}"
 					oninput="cell_changed(this)"
+					onfocus="cell_focus(this)"
 					onkeydown="cell_keydown(this, event)"
 					onblur="cell_save(this)"/>
 				</td>

@@ -9,14 +9,21 @@ function cell_changed(input) {
 }
 
 function cell_keydown(input, event) {
-    console.log(event.key);
     if (event.key == 'Enter') {
-        cell_save(input);
         input.blur();
     }
 }
 
+function cell_focus(input) {
+	input.setAttribute("prevValue", String(input.value));
+}
+
 function cell_save(input) {
+	console.log(input.prevValue, input.value);
+	if (input.getAttribute("prevValue") == input.value) {
+		return;
+	}
+
     const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 
     const col = input.getAttribute('data-col');
@@ -29,14 +36,14 @@ function cell_save(input) {
     body.append('hour', Number(hourCell.innerText.split(':')[0]));
     body.append('csrfmiddlewaretoken', csrfToken);
 
+	let resultLabel = document.querySelector('.result-label');
+	resultLabel.className = '';
+	void resultLabel.offsetWidth;
+
     fetch('/update-timetable', {
         body: body,
         method: 'POST'
     }).then((r) => {
-        let resultLabel = document.querySelector('.result-label');
-        resultLabel.className = '';
-        void resultLabel.offsetWidth;
-        
         if (r.status == 200) {
             resultLabel.className = 'result-label success';
             resultLabel.innerText = 'Сохранено';
@@ -47,5 +54,9 @@ function cell_save(input) {
             resultLabel.innerText = 'Не удалось сохранить';
             console.log('Error');
         }
-    })
+    }).catch((r) => {
+		resultLabel.className = 'result-label error';
+		resultLabel.innerText = 'Не удалось сохранить';
+		console.log('Error (catch)');
+	})
 }
