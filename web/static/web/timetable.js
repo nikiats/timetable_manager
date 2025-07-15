@@ -8,7 +8,15 @@ function cell_changed(input) {
     }
 }
 
-function save(input) {
+function cell_keydown(input, event) {
+    console.log(event.key);
+    if (event.key == 'Enter') {
+        cell_save(input);
+        input.blur();
+    }
+}
+
+function cell_save(input) {
     const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 
     const col = input.getAttribute('data-col');
