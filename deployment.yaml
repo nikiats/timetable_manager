@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: timetable_manager
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: timetable_manager
+  template:
+    metadata:
+      labels:
+        app: timetable_manager
+    spec:
+      containers:
+        - name: timetable_manager
+          image: nikiatsik/timetable_manager:latest
+          ports:
+            - containerPort: 8000
