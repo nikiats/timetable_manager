@@ -7,6 +7,16 @@
     text-shadow: none;
     text-decoration: none;
     box-sizing: border-box;
+	margin: 0px;
+	padding: 0px;
+}
+
+h2 {
+	padding: 20px 0;
+}
+
+h3 {
+	margin: 12px 0;
 }
 
 .center-container {
@@ -137,4 +147,8 @@ p.message-error {
 p.message-success {
     background: #f1fff4;
     border: 2px solid #4caf50;
+}
+
+.spacer {
+	height: 50px;
 }

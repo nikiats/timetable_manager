@@ -1,15 +1,19 @@
 from django.shortcuts import render, redirect
 from django.conf import settings
-from django.http import JsonResponse
+from django.http import HttpResponse, JsonResponse
 
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
+from django.template.loader import render_to_string
 from django.conf import settings
 
 from web.forms import UserLoginForm, UserSignupForm, TimetableCellEditForm
 from web.models import Timetable
 
+from web.template_utils import template_available_data
+
+import cairosvg
 
 HOUR_MIN = getattr(settings, 'DAY_TIME_MIN')
 MAX_LESSON_LENGTH = getattr(settings, 'MAX_LESSON_LENGTH')
@@ -118,3 +122,32 @@ def update_timetable(request):
             return JsonResponse({'success': True, 'errors': []}, status=200)
         else:
             return JsonResponse({ 'success': False, 'errors': list(form.errors.items()) }, status=400)
+        
+
+def available_svg_context(contents):
+	template_days, template_hours = template_available_data(contents)
+	context = {
+		'days': template_days,
+		'hours': template_hours
+	}
+	return context
+
+
+@login_required	
+def svg_image_available(request):
+    timetable = request.user.timetable
+    context = available_svg_context(timetable.contents)
+    return render(request, 'web/table_template.svg', context)
+
+
+@login_required	
+def png_image_available(request):
+	timetable = request.user.timetable
+	context = available_svg_context(timetable.contents)
+	svg_string = render_to_string('web/table_template.svg', context)
+    
+	image_bytes = cairosvg.svg2png(bytestring=svg_string.encode('utf-8'))
+	response = HttpResponse(image_bytes, content_type='image/png')
+	response['Content-Disposition'] = 'inline; filename="timetable.png"'
+    
+	return response

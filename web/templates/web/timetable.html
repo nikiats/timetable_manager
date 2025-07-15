@@ -8,6 +8,7 @@
 		<h2 class="heading" onclick="window.location.href = '/';">{{ site_name }}</h2>
 		{% include "web/elements/messages.html" %}
 		<h3>Расписание</h3>
+		<p class="result-label"></p>
 		<table class="timetable-editable">
 			<tr>
 				<th></th>
@@ -23,7 +24,6 @@
 			<tr>
 				<td>{{ row.hour }}</td>
 				{% for cell in row.lessons %}
-				<!-- выбор класса на этапе шаблона cell-available или cell-lesson -->
 				<td class="cell-{% if cell == '-' %}available{% elif cell != '' %}lesson{% endif %}">
 					<input
 					maxlength="{{ max_lesson_length }}"
@@ -41,11 +41,15 @@
 			{% endfor %}
 		</table>
 		<p></p>
+		<h3>Таблица с доступным временем</h3>
+		<img alt="" id="available-preview" style="margin-bottom: 10px; max-height: 400px;"/>
+		<input type="submit" onclick="get_preview()" class="btn-basic" value="Предпросмотр"/>
+		<input type="submit" onclick="download_available()" class="btn-basic" value="Скачать PNG"/>
         <form action="{% url 'web:logout' %}" method="post" class="vertical-rows">
 			{% csrf_token %}
-            <input type="submit" class="btn-basic" value="Выйти"/>
+			<input type="submit" class="btn-basic" value="Выйти"/>
         </form>
-		<p class="result-label"></p>
 	</div>
+	<div class="spacer"></div>
 </body>
 </html>

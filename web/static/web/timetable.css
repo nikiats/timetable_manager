@@ -102,7 +102,9 @@ table.timetable-editable td input::-webkit-outer-spin-button {
 .result-label {
     width: 100%;
     text-align: center;
-    font-size: 22px;
+    font-size: 16px;
+	height: 32px;
+	opacity: 0;
 }
 
 .result-label.success {

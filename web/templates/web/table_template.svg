@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1150" height="550">
+	<defs>
+		<linearGradient id="headerBlue" x1="0" y1="0" x2="0" y2="1">
+			<stop offset="0%" stop-color="#eaf6fd" />
+			<stop offset="100%" stop-color="#c7e0f8" />
+		</linearGradient>
+		<linearGradient id="hourGrey" x1="0" y1="0" x2="0" y2="1">
+			<stop offset="0%" stop-color="#fefefe" />
+			<stop offset="100%" stop-color="#e3e3e3" />
+		</linearGradient>
+	</defs>
+	<rect x="100" y="0" width="150" height="40" rx="8" ry="8" fill="url(#headerBlue)" stroke="#8baed5"
+		stroke-width="2" />
+	<text x="175" y="26" font-family="Tahoma, Segoe UI, Verdana" font-size="18" font-weight="bold" fill="#104e8b"
+		text-anchor="middle">Пн</text>
+	<rect x="250" y="0" width="150" height="40" rx="8" ry="8" fill="url(#headerBlue)" stroke="#8baed5"
+		stroke-width="2" />
+	<text x="325" y="26" font-family="Tahoma, Segoe UI, Verdana" font-size="18" font-weight="bold" fill="#104e8b"
+		text-anchor="middle">Вт</text>
+	<rect x="400" y="0" width="150" height="40" rx="8" ry="8" fill="url(#headerBlue)" stroke="#8baed5"
+		stroke-width="2" />
+	<text x="475" y="26" font-family="Tahoma, Segoe UI, Verdana" font-size="18" font-weight="bold" fill="#104e8b"
+		text-anchor="middle">Ср</text>
+	<rect x="550" y="0" width="150" height="40" rx="8" ry="8" fill="url(#headerBlue)" stroke="#8baed5"
+		stroke-width="2" />
+	<text x="625" y="26" font-family="Tahoma, Segoe UI, Verdana" font-size="18" font-weight="bold" fill="#104e8b"
+		text-anchor="middle">Чт</text>
+	<rect x="700" y="0" width="150" height="40" rx="8" ry="8" fill="url(#headerBlue)" stroke="#8baed5"
+		stroke-width="2" />
+	<text x="775" y="26" font-family="Tahoma, Segoe UI, Verdana" font-size="18" font-weight="bold" fill="#104e8b"
+		text-anchor="middle">Пт</text>
+	<rect x="850" y="0" width="150" height="40" rx="8" ry="8" fill="url(#headerBlue)" stroke="#8baed5"
+		stroke-width="2" />
+	<text x="925" y="26" font-family="Tahoma, Segoe UI, Verdana" font-size="18" font-weight="bold" fill="#104e8b"
+		text-anchor="middle">Сб</text>
+	<rect x="1000" y="0" width="150" height="40" rx="8" ry="8" fill="url(#headerBlue)" stroke="#8baed5"
+		stroke-width="2" />
+	<text x="1075" y="26" font-family="Tahoma, Segoe UI, Verdana" font-size="18" font-weight="bold" fill="#104e8b"
+		text-anchor="middle">Вс</text>
+	{% for hour in hours %}
+	<rect x="0" y="{{ hour.y }}" width="100" height="30" rx="6" ry="6" fill="url(#hourGrey)" stroke="#b1b1b1"
+		stroke-width="1.5" />
+	<text x="50" y="{{ hour.y|add:21 }}" font-family="Tahoma, Segoe UI, Verdana" font-size="16" fill="#354050"
+		text-anchor="middle">{{ hour.hour }}:00</text>
+	{% endfor %}
+	{% for day in days %}
+	{% for lesson in day.lessons %}
+	{% if lesson.content == "-" %}
+	<rect x="{{ day.x }}" y="{{ lesson.y }}" width="150" height="30" rx="6" ry="6" fill="#e1efd6" stroke="#9bcbaf"
+		stroke-width="1.5" />
+	<text x="{{ day.x|add:75 }}" y="{{ lesson.y|add:21 }}" font-family="Tahoma, Segoe UI, Verdana" font-size="15"
+		fill="#406643" text-anchor="middle">Свободно</text>
+	{% else %}
+	<rect x="{{ day.x }}" y="{{ lesson.y }}" width="150" height="30" rx="6" ry="6" fill="#ffffff" stroke="#d7d7d7"
+		stroke-width="1.5" />
+	{% endif %}
+	{% endfor %}
+	{% endfor %}
+	<g stroke="#c0c0c0" stroke-width="1">
+		<line x1="100" y1="0" x2="100" y2="550" />
+		<line x1="250" y1="0" x2="250" y2="550" />
+		<line x1="400" y1="0" x2="400" y2="550" />
+		<line x1="550" y1="0" x2="550" y2="550" />
+		<line x1="700" y1="0" x2="700" y2="550" />
+		<line x1="850" y1="0" x2="850" y2="550" />
+		<line x1="1000" y1="0" x2="1000" y2="550" />
+		<line x1="1150" y1="0" x2="1150" y2="550" />
+	</g>
+	<g stroke="#c0c0c0" stroke-width="1">
+		{% for hour in hours %}
+		<line x1="0" y1="{{ hour.y|add:30 }}" x2="1150" y2="{{ hour.y|add:30 }}" />
+		{% endfor %}
+	</g>
+</svg>
