@@ -15,6 +15,6 @@ spec:
       containers:
         - name: timetable-manager
           imagePullPolicy: Never
-          image: timetable_manager:latest
+          image: docker.io/library/timetable_manager:latest
           ports:
             - containerPort: 8000
