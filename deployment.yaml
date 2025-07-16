@@ -1,4 +1,5 @@
 apiVersion: apps/v1
+imagePullPolicy: Never
 kind: Deployment
 metadata:
   name: timetable-manager
