@@ -3,7 +3,7 @@ FROM python:3.12-slim
 WORKDIR /app
 COPY . /app
 
-RUN apt-get update && apt-get install -y libcairo2
+RUN apt-get update && apt-get install -y libcairo2 libcairo2-dev pkg-config python3-dev
 
 RUN pip install --upgrade pip && pip install -r requirements.txt
 
