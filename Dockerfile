@@ -3,6 +3,8 @@ FROM python:3.12-slim
 WORKDIR /app
 COPY . /app
 
+RUN apt-get update && apt-get install -y libcairo2
+
 RUN pip install --upgrade pip && pip install -r requirements.txt
 
 EXPOSE 8000
