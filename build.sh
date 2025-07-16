@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker build -t nikiatsik/timetable_manager:latest .
+docker build -t timetable_manager:latest .
