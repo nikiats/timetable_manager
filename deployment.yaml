@@ -1,5 +1,4 @@
 apiVersion: apps/v1
-imagePullPolicy: Never
 kind: Deployment
 metadata:
   name: timetable-manager
@@ -15,6 +14,7 @@ spec:
     spec:
       containers:
         - name: timetable-manager
+          imagePullPolicy: Never
           image: timetable_manager:latest
           ports:
             - containerPort: 8000
