@@ -5,4 +5,4 @@ kubectl apply -f service.yaml
 
 kubectl get pods
 
-minikube service django-service --url
+minikube service timetable-manager --url
