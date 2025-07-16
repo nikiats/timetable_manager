@@ -38,23 +38,28 @@
 	<text x="1075" y="26" font-family="Tahoma, Segoe UI, Verdana" font-size="18" font-weight="bold" fill="#104e8b"
 		text-anchor="middle">Вс</text>
 	{% for hour in hours %}
-	<rect x="0" y="{{ hour.y }}" width="100" height="30" rx="6" ry="6" fill="url(#hourGrey)" stroke="#b1b1b1"
-		stroke-width="1.5" />
-	<text x="50" y="{{ hour.y|add:21 }}" font-family="Tahoma, Segoe UI, Verdana" font-size="16" fill="#354050"
-		text-anchor="middle">{{ hour.hour }}:00</text>
+		<rect x="0" y="{{ hour.y }}" width="100" height="30" rx="6" ry="6" fill="url(#hourGrey)" stroke="#b1b1b1"
+			stroke-width="1.5" />
+		<text x="50" y="{{ hour.y|add:21 }}" font-family="Tahoma, Segoe UI, Verdana" font-size="16" fill="#354050"
+			text-anchor="middle">{{ hour.hour }}:00</text>
 	{% endfor %}
+	<g stroke="#c0c0c0" stroke-width="1">
+		{% for hour in hours %}
+			<line x1="0" y1="{{ hour.y|add:30 }}" x2="1150" y2="{{ hour.y|add:30 }}" />
+		{% endfor %}
+	</g>
 	{% for day in days %}
-	{% for lesson in day.lessons %}
-	{% if lesson.content == "-" %}
-	<rect x="{{ day.x }}" y="{{ lesson.y }}" width="150" height="30" rx="6" ry="6" fill="#e1efd6" stroke="#9bcbaf"
-		stroke-width="1.5" />
-	<text x="{{ day.x|add:75 }}" y="{{ lesson.y|add:21 }}" font-family="Tahoma, Segoe UI, Verdana" font-size="15"
-		fill="#406643" text-anchor="middle">Свободно</text>
-	{% else %}
-	<rect x="{{ day.x }}" y="{{ lesson.y }}" width="150" height="30" rx="6" ry="6" fill="#ffffff" stroke="#d7d7d7"
-		stroke-width="1.5" />
-	{% endif %}
-	{% endfor %}
+		{% for lesson in day.lessons %}
+			{% if lesson.content == "-" %}
+				<rect x="{{ day.x }}" y="{{ lesson.y }}" width="150" height="30" rx="6" ry="6" fill="#e1efd6" stroke="#9bcbaf"
+					stroke-width="1.5" />
+				<text x="{{ day.x|add:75 }}" y="{{ lesson.y|add:21 }}" font-family="Tahoma, Segoe UI, Verdana" font-size="15"
+					fill="#406643" text-anchor="middle">Свободно</text>
+			{% else %}
+				<rect x="{{ day.x }}" y="{{ lesson.y }}" width="150" height="30" rx="6" ry="6" fill="#ffffff" stroke="#d7d7d7"
+					stroke-width="1.5" />
+			{% endif %}
+		{% endfor %}
 	{% endfor %}
 	<g stroke="#c0c0c0" stroke-width="1">
 		<line x1="100" y1="0" x2="100" y2="550" />
@@ -65,10 +70,5 @@
 		<line x1="850" y1="0" x2="850" y2="550" />
 		<line x1="1000" y1="0" x2="1000" y2="550" />
 		<line x1="1150" y1="0" x2="1150" y2="550" />
-	</g>
-	<g stroke="#c0c0c0" stroke-width="1">
-		{% for hour in hours %}
-		<line x1="0" y1="{{ hour.y|add:30 }}" x2="1150" y2="{{ hour.y|add:30 }}" />
-		{% endfor %}
 	</g>
 </svg>
