@@ -6,6 +6,7 @@
 	<script type="text/javascript" src="{% static 'web/timetable.js' %}" type="text/css"></script>
 	<div class="center-container">
 		<h2 class="heading" onclick="window.location.href = '/';">{{ site_name }}</h2>
+		<p>Чтобы отметить время как доступное, введите «-». Любой другой текст — собственные данные о занятии.</p>
 		{% include "web/elements/messages.html" %}
 		<h3>Расписание</h3>
 		<p class="result-label"></p>
