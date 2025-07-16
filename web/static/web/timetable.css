@@ -7,26 +7,24 @@ table.timetable-editable {
 
 table.timetable-editable th,
 table.timetable-editable td {
-    border: 1px solid #7ba7d6; /* XP blue border */
+    border: 1px solid #7ba7d6;
     width: 50px;
     height: 20px;
-    background: #f6fafd; /* XP light blue cell background */
+    background: #f6fafd;
     color: #222;
     padding: 2px 6px;
     text-align: center;
     transition: background 0.2s;
 }
 
-/* Top header row (except first cell) */
 table.timetable-editable th:not(:first-child) {
-    border: 1px solid #3a6ea5; /* Stronger blue for header */
+    border: 1px solid #3a6ea5;
     font-weight: bold;
     background: linear-gradient(to bottom, #e3efff 0%, #b1d3f7 100%);
     color: #15428b;
     text-shadow: 1px 1px 0 #fff;
 }
 
-/* First column of every row (including top-left cell) */
 table.timetable-editable th:first-child {
     background: #e3efff;
     color: #15428b;
@@ -36,17 +34,14 @@ table.timetable-editable th:first-child {
     border: 1px solid #3a6ea5;
 }
 
-/* Hover effect for data cells */
 table.timetable-editable tr:hover td {
-    background: #dbeaf9; /* XP hover blue */
+    background: #dbeaf9;
 }
 
-/* Optional: Remove hover effect from first column */
 table.timetable-editable tr:hover th:first-child {
     background: #e3efff;
 }
 
-/* Optional: Zebra striping for rows */
 table.timetable-editable tbody td {
     background: #f0f6fb;
 }
@@ -61,8 +56,6 @@ table.timetable-editable tbody tr td:first-child {
     width: 50px;
 }
 
-
-/* Make input fill the td cell and look like regular text */
 table.timetable-editable td input {
     width: 100%;
     border: none;
@@ -71,12 +64,11 @@ table.timetable-editable td input {
     font-family: inherit;
     font-size: inherit;
     margin: 0;
-    outline: none; /* no outline on focus */
+    outline: none;
     box-shadow: none;
     cursor: text;
 }
 
-/* On focus, do not change background or outline, just show cursor */
 table.timetable-editable td input:focus {
     background: transparent;
     outline: none;
@@ -84,7 +76,6 @@ table.timetable-editable td input:focus {
     border: none;
 }
 
-/* Remove input's default inner padding and margin to align text properly */
 table.timetable-editable td input::-webkit-inner-spin-button,
 table.timetable-editable td input::-webkit-outer-spin-button {
     -webkit-appearance: none;
@@ -103,8 +94,8 @@ table.timetable-editable td input::-webkit-outer-spin-button {
     width: 100%;
     text-align: center;
     font-size: 16px;
-	height: 32px;
-	opacity: 0;
+    height: 32px;
+    opacity: 0;
 }
 
 .result-label.success {
