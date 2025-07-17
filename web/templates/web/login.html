@@ -8,7 +8,7 @@
 		<h3>Вход</h3>
 		<form action="login" method="post" class="vertical-rows">
 			{% csrf_token %}
-			<input type="text" name="username" placeholder="имя пользователя"/>
+			<input type="text" name="username" maxlength="{{ max_username_length }}" placeholder="имя пользователя"/>
 			<input type="password" name="password" placeholder="пароль"/>
 			<input type="submit" class="btn-basic" value="Отправить"/>
 		</form>

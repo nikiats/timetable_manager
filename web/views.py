@@ -15,9 +15,11 @@ from web.template_utils import template_available_data
 
 import cairosvg
 
+
 HOUR_MIN = getattr(settings, 'DAY_TIME_MIN')
 MAX_LESSON_LENGTH = getattr(settings, 'MAX_LESSON_LENGTH')
 SITE_NAME = getattr(settings, 'SITE_NAME')
+MAX_USERNAME_LENGTH = getattr(settings, 'MAX_USERNAME_LENGTH')
 
 
 def create_error_dicts(form):
@@ -32,7 +34,7 @@ def create_error_dicts(form):
 
 def index_view(request):
     context = { 
-        'site_name': settings.SITE_NAME,
+        'site_name': SITE_NAME,
         'authorized': request.user.is_authenticated
     }
     return render(request, 'web/index.html', context)
@@ -42,7 +44,10 @@ def signup_view(request):
     if request.user.is_authenticated:
         return redirect(getattr(settings, 'LOGIN_REDIRECT_URL'))
 
-    context = { 'site_name': settings.SITE_NAME }
+    context = { 
+        'site_name': SITE_NAME,
+        'max_username_length': MAX_USERNAME_LENGTH
+    }
     if request.method == 'POST':
         form = UserSignupForm(request.POST)
         
@@ -56,7 +61,6 @@ def signup_view(request):
 
             user = User.objects.create_user(username=username, password=password)
             Timetable.objects.create(user=user)
-
             
             login(request, user)
             return redirect('web:timetable')
@@ -71,7 +75,10 @@ def login_view(request):
     if request.user.is_authenticated:
         return redirect(getattr(settings, 'LOGIN_REDIRECT_URL'))
 
-    context = { 'site_name': settings.SITE_NAME }
+    context = { 
+        'site_name': SITE_NAME,
+        'max_username_length': MAX_USERNAME_LENGTH
+    }
     if request.method == 'POST':
         form = UserLoginForm(request.POST)
 
