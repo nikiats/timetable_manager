@@ -21,7 +21,7 @@ class Timetable(models.Model):
 		related_name='timetable',
 		on_delete=models.CASCADE
 	)
-	contents = models.JSONField(default=default_lessons())
+	contents = models.JSONField(default=default_lessons)
 
 
 	def count_lessons(self):

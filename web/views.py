@@ -144,7 +144,7 @@ def available_svg_context(contents):
 def svg_image_available(request):
     timetable = request.user.timetable
     context = available_svg_context(timetable.contents)
-    return render(request, 'web/table_template.svg', context)
+    return render(request, 'web/table_template.svg', context, content_type='image/svg+xml')
 
 
 @login_required	
